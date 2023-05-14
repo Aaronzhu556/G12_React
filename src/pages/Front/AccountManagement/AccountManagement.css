@@ -1,0 +1,11 @@
+#accountmangement {
+  margin: 20px auto;
+  width: 1200px;
+  background-color: white;
+  padding: 20px;
+  display: flex;
+}
+
+.accountmangement_tabs {
+  width: 100%;
+}

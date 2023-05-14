@@ -1,0 +1,36 @@
+#back {
+  height: 100vh;
+  width: 100vw;
+}
+
+.back-container {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+/* 菜单栏 */
+.back-container > ul {
+  margin: 90px 50px 20px;
+  height: calc(100% - 120px);
+}
+
+.back-container > ul > li.ant-menu-item {
+  margin-block: 20px;
+}
+
+.back-container .ant-menu-title-content {
+  margin-inline-start: 20px !important;
+}
+
+.back-right {
+  flex-grow: 1;
+  padding: 90px 30px 20px 0;
+  overflow-y: auto;
+}
+
+.back-main {
+  min-height: calc(100vh - 120px);
+  padding: 20px;
+  background-color: white;
+  margin-right: 20px;
+}

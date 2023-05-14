@@ -1,0 +1,5 @@
+.App {
+  transition: .3s;
+  background-color: var(--color-app-bg);
+  color: var(--color-font);
+}

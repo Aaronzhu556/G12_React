@@ -1,0 +1,5 @@
+.front {
+  text-align: center;
+  padding-top: 50px;
+  min-height: calc(100vh - var(--height-footer-banner));
+}

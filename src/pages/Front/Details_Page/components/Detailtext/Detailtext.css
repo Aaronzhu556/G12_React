@@ -1,0 +1,15 @@
+.dpage-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.dpage-text p {
+  margin-top: 10px;
+}
+
+.dpage-text h1,
+.dpage-text h2,
+.dpage-text h3 {
+  margin-top: 20px;
+}

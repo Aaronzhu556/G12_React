@@ -1,0 +1,15 @@
+.our_advantages_content {
+  display: inline-block;
+  width: 248px;
+  height: 300px;
+}
+.our_advantages_content:not(:last-child) {
+  margin: 0 20px 20px 0;
+}
+.our_advantages_content_text {
+  padding: 10px 5px;
+}
+
+.our_advantages_content_text p {
+  margin-top: 10px;
+}

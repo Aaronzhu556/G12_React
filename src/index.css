@@ -1,0 +1,110 @@
+:root {
+  --color-primary: #0053b3;
+  --color-primary-bg: #0054b337;
+  --color-primary-font: var(--color-white);
+  --color-font: var(--color-black);
+  --color-grey: #888;
+  --color-black: #000;
+  --color-black-transparent: #000000cc;
+  --color-white: #fff;
+  --color-white-transparent: #ffffffcc;
+  --color-app-bg: #f2f5f7;
+  --color-navbar-bg: var(--color-white);
+  --color-bg-grey: #e8e8e8;
+  --color-input-bg: var(--color-white);
+  --color-sidebar-bg: var(--color-white-transparent);
+  --height-footer-banner: 70px;
+  --color-card-border: #e6edff;
+  --card-border: 1px solid var(--color-card-border);
+  --card-bg: var(--color-white);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+a.link-text {
+  text-decoration: none;
+  color: var(--color-font);
+  transition: 0.3s;
+}
+
+a.link-text:hover {
+  color: var(--color-primary);
+}
+
+p {
+  line-height: 1.5;
+}
+
+.echarts {
+  border: var(--card-border);
+  background-color: var(--color-input-bg);
+  padding: 20px;
+}
+
+.loading {
+  height: 100vh;
+}
+
+.loading .ant-spin {
+  height: 100vh !important;
+  max-height: 100vh !important;
+}
+
+
+/* 表格 */
+.table_action {
+  color: var(--color-primary);
+  cursor: pointer;
+}
+.table_img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+}
+
+/* 对话框、弹窗 */
+.modal_item {
+  display: flex;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.modal_item .ant-upload-wrapper {
+  width: fit-content;
+}
+
+.modal_item label {
+  width: 150px;
+  margin-right: 20px;
+}
+
+.modal_item_photo {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+@media screen and (max-width: 600px) {
+  body {
+    font-size: 14px;
+  }
+}

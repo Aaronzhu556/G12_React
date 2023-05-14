@@ -1,0 +1,9 @@
+#provider_account {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#provider_account h1 {
+  margin-bottom: 40px;
+}

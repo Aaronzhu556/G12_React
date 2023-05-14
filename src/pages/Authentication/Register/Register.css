@@ -1,0 +1,25 @@
+#register-form {
+  box-shadow: var(--box-shadow);
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  width: 400px;
+}
+
+#register-form h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: var(--color-primary);
+}
+
+.register-form-button {
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.register_flex {
+  display: flex;
+}
+
+.register_flex_left {
+  margin-right: 20px;
+}

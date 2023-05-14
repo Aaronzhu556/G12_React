@@ -1,0 +1,17 @@
+.cs_ss_firstService {
+    float: left;
+    height: 200px;
+    width: 350px;
+    display:block;
+    margin-left: 1vw;
+    background-color: black;
+    background-size: 350px 200px;
+  }
+
+  .cs_ss_firstService p {
+    color: rgb(255, 255, 255);
+    font-weight: 500;
+    font-size: 2rem;
+    margin-top: 70px;
+    
+  }

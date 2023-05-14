@@ -1,0 +1,14 @@
+#footer {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-white);
+}
+
+.footer-banner {
+  background-color: var(--color-primary-bg);
+  height: var(--height-footer-banner);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px;
+}
