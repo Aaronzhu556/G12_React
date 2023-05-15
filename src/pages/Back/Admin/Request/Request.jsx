@@ -1,6 +1,6 @@
-import { Rate, Space, Table, Tabs } from "antd";
+import { Rate, Space, Table, Tabs,message } from "antd";
 import React, { useEffect, useState } from "react";
-import { getData } from "../../../../util/api";
+import {getData, postData} from "../../../../util/api";
 
 const Request = () => {
   const [formData0, setFormData0] = useState();
@@ -12,18 +12,43 @@ const Request = () => {
     pageSize: 1,
     pageNum: 5,
   });
+  // useEffect(() => {
+  //   getData("/request/getallgoodreview").then((data) =>
+  //     setFormData0(data.res_object)
+  //   );
+  //   getData("/request/getallbadreview").then((data) =>
+  //     setFormData1(data.res_object)
+  //   );
+  // });
   useEffect(() => {
-    getData("/request/getallgoodreview").then((data) =>
-      setFormData0(data.res_object)
+    postData("/request/getallgoodreview", body).then((data) =>
+        setFormData0(data.res_object)
     );
     getData("/request/getallbadreview").then((data) =>
-      setFormData1(data.res_object)
+        setFormData1(data.res_object)
     );
-  });
-
+  }, [body]);
+  const getAllGoodReview=()=>{
+    postData("/request/getallgoodreview", body).then((data) =>
+        setFormData0(data.res_object)
+    );
+  }
+  const getAllBadReview=()=>{
+    getData("/request/getallbadreview").then((data) =>
+        setFormData1(data.res_object)
+    );
+  }
   // 删除请求
   const onDelete = (id) => {
-    getData(`/request/deleterequest?request_id=${id}`)
+    getData(`/request/deletebadreview?request_id=${id}`)
+  }
+  const onDeleteBad=(id)=>{
+    getData(`/request/deletebadreview?request_id=${id}`).then((data)=>{
+      if (parseInt(data.res_code)===200) message.success("Successfully deleted bad comments");
+      else message.error("System errror");
+    }).finally(()=>{
+      getAllBadReview();
+    })
   }
 
   // console.log(formData);
@@ -41,9 +66,14 @@ const Request = () => {
       key: "request_review",
     },
     {
-      title: "Description",
-      dataIndex: "request_description",
-      key: "request_description",
+      title: "User Name",
+      dataIndex: ["user","user_name"],
+      key: "user_name",
+    },
+    {
+      title: "Service Name",
+      dataIndex: ["service","service_name"],
+      key: "service_name",
     },
     {
       title: "Rating",
@@ -62,7 +92,7 @@ const Request = () => {
         <Space size="middle">
           <div
             className="table_action"
-            onClick={() => onDelete(record.request_id)}
+            onClick={() => onDeleteBad(record.request_id)}
           >
             Delete
           </div>
@@ -83,9 +113,14 @@ const Request = () => {
       key: "request_review",
     },
     {
-      title: "Description",
-      dataIndex: "request_description",
-      key: "request_description",
+      title: "User Name",
+      dataIndex: ["user","user_name"],
+      key: "user_name",
+    },
+    {
+      title: "Service Name",
+      dataIndex: ["service","service_name"],
+      key: "service_name",
     },
     {
       title: "Rating",
@@ -104,7 +139,7 @@ const Request = () => {
         <Space size="middle">
           <div
             className="table_action"
-            onClick={() => onDelete(record.request_id)}
+            onClick={() => onDeleteBad(record.request_id)}
           >
             Delete
           </div>

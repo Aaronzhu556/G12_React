@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./Home.css";
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
-import { Button, Input, Select } from "antd";
+import { Button, Input, Select ,Empty } from "antd";
 import { produce } from "immer";
 import { postData } from "../../../util/api";
 
@@ -66,14 +66,15 @@ const Home = () => {
     );
   };
 
-  // useEffect(() => {
-  //   postData("/service/getallservice", searchData).then((data) =>
-  //     setServiceData(data.res_object)
-  //   );
-  // }, [searchData]);
+  useEffect(() => {
+    postData("/service/getallservice", searchData).then((data) =>
+      setServiceData(data.res_object)
+    );
+  }, [searchData]);
     useEffect(() => {
         onSearch();
     }, []);
+
   return (
     <div id="home">
       <h1 className="home_slogan">Find The Best Service</h1>
@@ -154,7 +155,7 @@ const Home = () => {
           ))}
         </div>
       ) : (
-        <p style={{ color: "red" }}>No Data</p>
+          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
       )}
     </div>
   );

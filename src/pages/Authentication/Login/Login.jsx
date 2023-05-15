@@ -61,12 +61,14 @@ const Login = () => {
             console.log(userInfo)
             userInfo["role"] = values.role;
             localStorage.setItem("userinfo", JSON.stringify(userInfo));
+            message.success("User login successful")
             navigate("/");
           });
         } else {
           let userInfo = data.res_object;
           userInfo["role"] = values.role;
           localStorage.setItem("userinfo", JSON.stringify(userInfo));
+          message.success("Service Provider login successful")
         }
         navigate("/");
         //this.forceUpdate()
@@ -76,10 +78,10 @@ const Login = () => {
           type: "error",
           content: "Wrong account or password!",
         });
-      } else if (data.res_code === "202") {
+      } else{
         messageApi.open({
           type: "error",
-          content: "Don't have this account",
+          content: "Account isn't exist Or your account has not been approved",
         });
       }
     });

@@ -1,4 +1,4 @@
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input ,message} from "antd";
 import React, { useState } from "react";
 import "./Account.css";
 import TextArea from "antd/es/input/TextArea";
@@ -35,7 +35,11 @@ const Account = () => {
     // console.log(values);
     postData("/serviceprovider/updateserviceprovider", body).then((data) => {
       localStorage.setItem("userinfo", JSON.stringify(data.res_object));
-      console.log(data.res_object);
+      if (parseInt(data.res_code)===200)message.success("ServiceProvider personal information updated successfully!");
+      else if (parseInt(data.res_code)===201) message.info("ServiceProvider personal information update failed");
+      else message.error("System error!");
+    }).finally(()=>{
+
     });
   };
 

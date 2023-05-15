@@ -163,7 +163,7 @@ const Register = () => {
         </Form.Item>
 
         <Form.Item
-          name="user_code"
+          name={formItemName[3]}
           rules={[
             {
               required: true,

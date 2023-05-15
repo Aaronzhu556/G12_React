@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, Avatar, Rate } from "antd";
+import {Card, Avatar, Rate, Empty} from "antd";
 import "./Comments.css";
 import { useParams } from "react-router-dom";
 import { getData } from "../../../../../util/api";
@@ -45,7 +45,7 @@ export default function Comments() {
             </Card>
           );
         })
-      ) : <p style={{color: "red", margin:40}}>No Review</p>}
+      ) :   <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />}
     </>
   );
 }

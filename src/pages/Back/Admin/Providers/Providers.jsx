@@ -1,4 +1,4 @@
-import { Rate, Space, Table, Tabs } from "antd";
+import { Rate, Space, Table, Tabs,message } from "antd";
 import React, { useEffect, useState } from "react";
 import "./Providers.css";
 import { getData, postData } from "../../../../util/api";
@@ -13,7 +13,16 @@ const Providers = () => {
     pageSize: 1,
     pageNum: 5,
   });
-
+  const getServiceProvider0=()=>{
+    postData("/serviceprovider/getall0serviceprovider", body).then((data) =>
+        setFormData0(data.res_object)
+    );
+  }
+  const getServiceProvider1=()=>{
+    getData("/serviceprovider/getall1serviceprovider").then((data) =>
+        setFormData1(data.res_object)
+    );
+  }
   useEffect(() => {
     postData("/serviceprovider/getall0serviceprovider", body).then((data) =>
       setFormData0(data.res_object)
@@ -24,13 +33,31 @@ const Providers = () => {
   }, [body]);
 
   // delete
-  const onDelete = (id) => {
-    getData(`/serviceprovider/deleteserviceprovider?service_provider_id=${id}`);
-  };
+  const onDelete0 = (id) => {
+    getData(`/serviceprovider/deleteserviceprovider?service_provider_id=${id}`).then((data)=>{
+      if (parseInt(data.res_code)===200) message.success("Successfully deleted a invalid serviceProvider")
+      else message.error("System error")
 
+    }).finally(()=>{
+      getServiceProvider0();
+    });
+  };
+  const onDelete1 = (id)=>{
+    getData(`/serviceprovider/deleteserviceprovider?service_provider_id=${id}`).then((data)=>{
+      if (parseInt(data.res_code)===200) message.success("Successfully deleted serviceProvider with low rating");
+      else message.error("System error");
+    }).finally(()=>{
+      getServiceProvider1();
+    });
+  }
   // Approve
   const onApprove = (id) => {
-    getData(`/admin/updateserviceproviderstatus?service_provider_status=1&service_provider_id=${id}`)
+    getData(`/admin/updateserviceproviderstatus?service_provider_status=1&service_provider_id=${id}`).then((data)=>{
+      if (parseInt(data.res_code)===200) message.success("The serviceProvider has been approved");
+      else  message.error("System error")
+    }).finally(()=>{
+      getServiceProvider0();
+    })
   }
   
 
@@ -69,9 +96,9 @@ const Providers = () => {
           <div className="table_action" onClick={() => onApprove(record.service_provider_id)}>Approve</div>
           <div
             className="table_action"
-            onClick={() => onDelete(record.service_provider_id)}
+            onClick={() => onDelete0(record.service_provider_id)}
           >
-            Delete
+            Reject
           </div>
         </Space>
       ),
@@ -121,7 +148,7 @@ const Providers = () => {
         <Space size="middle">
           <div
             className="table_action"
-            onClick={() => onDelete(record.service_provider_id)}
+            onClick={() => onDelete1(record.service_provider_id)}
           >
             Delete
           </div>

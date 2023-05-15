@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table, Space, Form, Input, Button, Modal, Rate } from "antd";
+import {Table, Space, Form, Input, Button, Modal, Rate, message,Empty } from "antd";
 import "./History.css";
 import { getData } from "../../../../../util/api";
 
@@ -14,6 +14,7 @@ const layout = {
 
 export default function History() {
   // Edit Form Data
+  const [messageApi, contextHolder] = message.useMessage();
   const [requestId, setRequestId] = useState();
   const onFinish = (values) => {
     // console.log(values);
@@ -28,8 +29,12 @@ export default function History() {
   const onDelete = (id) => {
     console.log(id);
     getData(`/request/deleterequest?request_id=${id}`).then((data) =>
-      console.log(data)
-    );
+        {
+          if (parseInt(data.res_code)===200) message.success("Successfully deleted historical orders")
+          else if (parseInt(data.res_code)===201) message.info("Failed to delete historical orders")
+          else message.error("System error")
+        }
+    ).finally(()=>{requestData()})
   };
 
   // 对话框、弹窗 - 修改服务数据
@@ -125,7 +130,7 @@ export default function History() {
       {formData ? (
         <Table columns={columns} dataSource={formData} rowKey="request_id" />
       ) : (
-        <p style={{ color: "red" }}>No Data</p>
+          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
       )}
       <Modal
         title="Edit Service"

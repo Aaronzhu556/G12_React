@@ -1,5 +1,5 @@
 import React, { useEffect, useState ,Component} from "react";
-import {Table, Space, Modal, Input, Button, Form, message} from "antd";
+import {Table, Space, Modal, Input, Button, Form, message,Empty} from "antd";
 import "./Request.css";
 import { getData } from "../../../../../util/api";
 
@@ -59,14 +59,17 @@ const requestData = ()=>{
   // }, []);
 
   const onWithdraw = (id) => {
-    getData(`/request/withdrawrequest?request_id=${id}`).then(
-      successWithdraw()
+    getData(`/request/withdrawrequest?request_id=${id}`).then((data)=> {
+      if (parseInt(data.res_code)===200) message.success("Withdraw the request successfully!")
+      else if(parseInt(data.res_code)===201)  {
+        message.error("Withdraw the request failed!Because you can only withdraw the request which the status is pending...")
+      }
+      else message.error("System error")
+    }
     ).finally(()=>{requestData()});
 
   };
-  const successWithdraw=()=>{
-    //message.success("Withdraw the request successfully!")
-  }
+
   // Edit Form
   const onFinish = (values) => {
     // console.log(values);
@@ -127,7 +130,7 @@ const requestData = ()=>{
       {formData ? (
         <Table columns={columns} dataSource={formData} rowKey="request_id" />
       ) : (
-        <p style={{ color: "gray" }}>No Data</p>
+          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
       )}
       {/* 对话框、弹窗 */}
       <Modal

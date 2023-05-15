@@ -62,6 +62,7 @@ const Services = () => {
   };
   const handleOk = () => {
     setConfirmLoading(true);
+    message.success("Successfully modified service information!")
     setTimeout(() => {
       setOpen(false);
       setOpen1(false);
@@ -101,7 +102,11 @@ const Services = () => {
     JSON.parse(localStorage.getItem("userinfo")) || null
   );
   // console.log(userData);
-
+  const getAllServiceByProvider=() =>{
+    getData(
+        `/service/getallservicebyprovider?provider_id=${userData.service_provider_id}`
+    ).then((data) => setFormData(data.res_object));
+  }
   useEffect(() => {
     getData(
       `/service/getallservicebyprovider?provider_id=${userData.service_provider_id}`
@@ -112,7 +117,10 @@ const Services = () => {
   const onFinish = (values) => {
     // console.log(values);
     const newBody = { ...bodyRef.current, ...values };
-    postData("/service/updateservice", newBody).then(handleOk());
+    postData("/service/updateservice", newBody).then(handleOk()).finally(()=>{
+      getAllServiceByProvider();
+
+    });
   };
 
   // 请求体 - 添加service
@@ -134,12 +142,15 @@ const Services = () => {
   // Add Form Data
   const onFinish1 = (values) => {
     // console.log(values);
-    const result = postData("/service/addservice", { ...body1, ...values }).then(handleOk());
-    console.log(result.res_code)
-    if (parseInt(result.res_code)===200){
-      message.success("Service is added successfully!");
-    }else message.error("Got an error!");
-
+    const result = postData("/service/addservice", { ...body1, ...values }).then((data)=>{
+      if (parseInt(data.res_code)===200)   message.success("Service added successfully!");
+      else if (parseInt(data.res_code)===201) message.info("Failed to add service!");
+      else message.error("System error");
+     // setBody1
+    }).finally(()=>{
+      getAllServiceByProvider()//后面应该关闭输入框
+      setOpen1(false)
+    });
   };
 
   const columns = [

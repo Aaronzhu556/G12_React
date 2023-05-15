@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input ,message} from "antd";
 import "./Account.css";
 import { getData } from "../../../../util/api";
 
@@ -24,6 +24,8 @@ const Account = () => {
     getData(`/admin/updateadminpassword?admin_id=${userData.admin_id}&admin_password=${values.admin_password}`)
       .then(data => {
         localStorage.setItem("userinfo", JSON.stringify({...userData, ...values}));
+        if (parseInt(data.res_code)===200) message.success("Administrator information updated successfully");
+        else message.error("System error");
       })
   };
 
