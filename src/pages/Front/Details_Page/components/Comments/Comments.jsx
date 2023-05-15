@@ -32,7 +32,6 @@ export default function Comments() {
                   <span>
                     <Rate
                       style={{ zoom: 0.8 }}
-                      allowHalf
                       disabled
                       defaultValue={item.request_rating}
                     />

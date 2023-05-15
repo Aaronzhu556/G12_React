@@ -64,13 +64,21 @@ const Login = () => {
             message.success("User login successful")
             navigate("/");
           });
-        } else {
+        } else if(values.role==="provider") {
           let userInfo = data.res_object;
           userInfo["role"] = values.role;
           localStorage.setItem("userinfo", JSON.stringify(userInfo));
           message.success("Service Provider login successful")
+          navigate("/back/provider/services")
+        }else if (values.role==="admin"){
+          let userInfo = data.res_object;
+          userInfo["role"] = values.role;
+          localStorage.setItem("userinfo", JSON.stringify(userInfo));
+          message.success("Admin login successful")
+          navigate("/back/admin/")
         }
-        navigate("/");
+
+       // navigate("/");
         //this.forceUpdate()
         //forceUpdate();
       } else if (data.res_code === "201") {

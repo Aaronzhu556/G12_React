@@ -1,8 +1,8 @@
-import { Button, Form, Input, Modal, Rate, Space, Table ,Upload,message} from "antd";
+import { Button, Form, Input, Modal, Rate, Space, Table ,Upload,message,Popconfirm} from "antd";
 import React, { useEffect, useRef, useState, Component  }from "react";
 import "./Services.css";
 import { getData, postData } from "../../../../util/api";
-import { UploadOutlined } from '@ant-design/icons';
+import {SmallDashOutlined, UploadOutlined} from '@ant-design/icons';
 import {produce} from "immer";
 
 
@@ -62,7 +62,7 @@ const Services = () => {
   };
   const handleOk = () => {
     setConfirmLoading(true);
-    message.success("Successfully modified service information!")
+    message.success("Successfully modified service information!A notification will send to your previous customers!")
     setTimeout(() => {
       setOpen(false);
       setOpen1(false);
@@ -134,6 +134,16 @@ const Services = () => {
     service_category: "",
     s_service_provider_id: userData.service_provider_id,
   });
+  const confirm = (e) => {
+    console.log(e);
+    message.success('Click on Yes');
+    showModal(e);
+  };
+
+  const cancel = (e) => {
+    console.log(e);
+    message.error('Click on No');
+  };
   // 对话框、弹窗 - 添加服务数据
   const [open1, setOpen1] = useState(false);
   const showModal1 = () => {
@@ -202,11 +212,19 @@ const Services = () => {
       dataIndex: "service_rating",
       key: "service_rating",
       width: 200,
-      render: (_, record) => (
-        <Space size="middle">
+      // render: (_, record) => (
+      //   <Space size="middle">
+      //     <Rate disabled allowHalf defaultValue={record.service_rating} />
+      //   </Space>
+      // ),
+      render:(_,record)=>{
+        if (record.service_rating===0){
+          return   <SmallDashOutlined />
+        }
+        else return <Space size="middle">
           <Rate disabled allowHalf defaultValue={record.service_rating} />
         </Space>
-      ),
+      }
     },
     {
       title: "Action",
@@ -214,9 +232,12 @@ const Services = () => {
       fixed: "right",
       render: (_, record) => (
         <Space size="middle">
-          <div className="table_action" onClick={() => showModal(record)}>
-            Edit
-          </div>
+
+
+            <div className="table_action" onClick={() => showModal(record)}>
+              Edit
+            </div>
+
         </Space>
       ),
     },

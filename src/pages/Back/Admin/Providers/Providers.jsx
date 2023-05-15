@@ -2,6 +2,7 @@ import { Rate, Space, Table, Tabs,message } from "antd";
 import React, { useEffect, useState } from "react";
 import "./Providers.css";
 import { getData, postData } from "../../../../util/api";
+import {SmallDashOutlined} from "@ant-design/icons";
 
 const Providers = () => {
   const [formData0, setFormData0] = useState();
@@ -77,6 +78,11 @@ const Providers = () => {
       title: "Address",
       dataIndex: "service_provider_address",
       key: "service_provider_address",
+      render:(_,record)=>{
+        if (record.service_provider_address===null){
+          return   <SmallDashOutlined />
+        }else return <span>{record.service_provider_address}</span>;
+      }
     },
     {
       title: "Email",
@@ -87,6 +93,11 @@ const Providers = () => {
       title: "Description",
       dataIndex: "service_provider_description",
       key: "service_provider_description",
+      render:(_,record)=>{
+        if (record.service_provider_description===null){
+          return   <SmallDashOutlined />
+        }else return <span>{record.service_provider_description}</span>;
+      }
     },
     {
       title: "Action",
